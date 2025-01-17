@@ -1,0 +1,13 @@
+# oc-pipelines-app-logs.yml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: my-app-pod
+  namespace: my-namespace
+spec:
+  containers:
+    - name: my-app-container
+      image: my-app-image
+---
+# Fetch logs from the OpenShift pod
+oc logs my-app-pod -n my-namespace > oc-pipelines-app-logs.txt

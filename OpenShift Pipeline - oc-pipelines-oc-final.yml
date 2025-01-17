@@ -1,0 +1,17 @@
+# oc-pipelines-oc-final.yml
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: pipeline-final-stage
+  namespace: my-namespace
+spec:
+  tasks:
+    - name: deploy-app
+      taskRef:
+        name: deploy-task
+    - name: verify-deployment
+      taskRef:
+        name: verify-deployment-task
+    - name: cleanup
+      taskRef:
+        name: cleanup-task

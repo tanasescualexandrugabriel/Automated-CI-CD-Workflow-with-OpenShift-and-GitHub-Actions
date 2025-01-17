@@ -1,0 +1,25 @@
+# .github/workflows/workflow.yml
+name: CI Pipeline
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  tests:
+    name: Run unit tests with nose
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+      - name: Install dependencies
+        run: |
+          pip install nose
+      - name: Run tests
+        run: |
+          nosetests

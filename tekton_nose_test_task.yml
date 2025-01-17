@@ -1,0 +1,14 @@
+# .tekton/tasks.yml
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: nose-test-task
+spec:
+  steps:
+    - name: run-nose-tests
+      image: python:3.9
+      script: |
+        #!/bin/bash
+        echo "Installing dependencies and running nose tests..."
+        pip install nose
+        nosetests

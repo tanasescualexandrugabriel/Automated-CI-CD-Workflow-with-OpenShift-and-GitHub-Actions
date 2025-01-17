@@ -1,0 +1,35 @@
+# cicd-github-validate.yml
+name: CI/CD GitHub Actions Validation
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: 3.9
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+
+      - name: Run linting with flake8
+        run: |
+          flake8 .
+
+      - name: Run unit tests with nose
+        run: |
+          nosetests
+
+      - name: Deploy to OpenShift (optional)
+        run: |
+          oc apply -f oc-pipelines-console-pvc-details.yml

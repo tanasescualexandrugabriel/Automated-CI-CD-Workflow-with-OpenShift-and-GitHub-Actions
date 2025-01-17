@@ -1,0 +1,20 @@
+# oc-pipelines-oc-green.yml
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  name: pipeline-green-stage
+  namespace: my-namespace
+spec:
+  tasks:
+    - name: deploy-app
+      taskRef:
+        name: deploy-task
+    - name: verify-deployment
+      taskRef:
+        name: verify-deployment-task
+    - name: run-health-checks
+      taskRef:
+        name: health-check-task
+    - name: finalize-deployment
+      taskRef:
+        name: finalize-deployment-task
